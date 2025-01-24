@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    //RecipeView properties
-    //@State var selectedRecipe = ""
-    
     var body: some View {
         ScrollView{
-            
             VStack{
-                
                 //Header
                 HStack{
                     Button {

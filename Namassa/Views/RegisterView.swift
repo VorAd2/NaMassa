@@ -1,16 +1,13 @@
-//
-//  RegisterView.swift
-//  Namassa
-//
-//  Created by found on 21/01/25.
-//
-
 import SwiftUI
 
+
 struct RegisterView: View {
-    @State private var email = ""
     @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
+//    @State private var isInvalidUser = false
+//    @State private var isInvalidEmail = false
+//    @State private var isInvalidPass = false
     
     var body: some View {
         ZStack{
@@ -22,26 +19,22 @@ struct RegisterView: View {
                     .padding(.bottom, 40)
                 
                 
-                
                 Text("Crie sua conta")
                     .font(.system(size: 26))
                     .padding(.bottom, 30)
                 
                 VStack(spacing:20){//qd colocar sombra, poe 33 em spacing
                     
-                    FieldView(message: "Insira seu nome de usuário", txt: $username)
+                    FieldView(symbol:"person" ,message: "Insira seu nome de usuário", txt: $username, isSecure: false)
                     
-                    FieldView(message: "Insira seu E-mail", txt: $email)
+                    FieldView(symbol: "mail" ,message: "Insira seu E-mail", txt: $email, isSecure: false)
                     
-                    FieldView(message: "Insira sua senha", txt: $password)
+                    FieldView(symbol: "key" ,message: "Insira sua senha", txt: $password, isSecure: true)
                     
                     
                     Button {
-                        print()
-                        print(username)
-                        print(email)
-                        print(password)
-                        print()
+                        //isInvalidUser = username.isEmpty ? true:false
+                        
                     }label: {
                         Text("CRIAR")
                             .font(.system(size:20))
@@ -58,6 +51,13 @@ struct RegisterView: View {
                 }//fim VStack
                 
                 Spacer()
+                Button {
+                    //RegisterView
+                }label: {
+                    Text("Já possui uma conta?")
+                        .foregroundColor(.black.opacity(0.4))
+                        .underline()
+                }
             }
             .padding()
             

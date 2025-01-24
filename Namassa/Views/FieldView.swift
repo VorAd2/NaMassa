@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct FieldView: View {
+    var symbol: String
     var message: String
-    @Binding var txt: String // Nao esta modificando
+    @Binding var txt: String
+    var isSecure: Bool
+    //var isInvalidContent: Bool
     
     var body: some View {
         ZStack{
@@ -24,7 +27,7 @@ struct FieldView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.black.opacity(0.1))
                 .offset(x: 0, y: 4)
-                
+            
             
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.black.opacity(0.5))
@@ -33,15 +36,45 @@ struct FieldView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.black.opacity(0.5))
                 .offset(x: -1, y: 0)
-                
+            
+//            if isInvalidContent {
+//                RoundedRectangle(cornerRadius: 12)
+//                    .fill(Color.red.opacity(2))
+//                    .offset(x: 0, y: -2)
+//                
+//                RoundedRectangle(cornerRadius: 12)
+//                    .fill(Color.red.opacity(2))
+//                    .offset(x: 0, y: 2)
+//                
+//                RoundedRectangle(cornerRadius: 12)
+//                    .fill(Color.red.opacity(0.5))
+//                    .offset(x: 1, y: 0)
+//                
+//                RoundedRectangle(cornerRadius: 12)
+//                    .fill(Color.red.opacity(0.5))
+//                    .offset(x: -1, y: 0)
+//            }
             
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.white)
             
-            TextField("\(message)", text: $txt)
-                .padding()
-                .autocorrectionDisabled()
-                .autocapitalization(.none)
+            HStack{
+                Image(systemName: symbol)
+                    .padding(.leading)
+                if isSecure{
+                    SecureField("\(message)", text: $txt)
+                        .padding()
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .cornerRadius(12)
+                } else {
+                    TextField("\(message)", text: $txt)
+                        .padding()
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .cornerRadius(12)
+                }
+            }
         }
         .frame(height: 50)
     }

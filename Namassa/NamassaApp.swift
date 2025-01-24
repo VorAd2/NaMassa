@@ -11,7 +11,7 @@ import SwiftUI
 struct NamassaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreenView()
         }
     }
 }

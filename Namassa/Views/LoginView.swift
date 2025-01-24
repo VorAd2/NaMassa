@@ -10,6 +10,8 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var isInvalidEmail = false
+    @State private var isinvalidPass = false
     
     var body: some View {
         ZStack{
@@ -35,13 +37,13 @@ struct LoginView: View {
                 VStack(spacing:20){//qd colocar sombra, poe 33 em spacing
                     
                     ZStack{
-                        FieldView(message: "Insira seu email", txt: $email)
+                        FieldView(symbol:"mail" ,message: "Insira seu email", txt: $email, isSecure: false)
                     }
                     .frame(height: 50)
                         
                     
                     ZStack{
-                        FieldView(message: "Insira sua senha", txt: $password)
+                        FieldView(symbol: "key" ,message: "Insira sua senha", txt: $password, isSecure: true)
                     }
                     .frame(height: 50)
                     
@@ -69,7 +71,7 @@ struct LoginView: View {
                         
                 Spacer()
                 Button {
-                    
+                    //RegisterView
                 }label: {
                     Text("Não possui uma conta?")
                         .foregroundColor(.black.opacity(0.4))
