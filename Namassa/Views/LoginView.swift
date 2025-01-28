@@ -72,6 +72,7 @@ struct LoginView: View {
                 Spacer()
                 Button {
                     //RegisterView
+                
                 }label: {
                     Text("Não possui uma conta?")
                         .foregroundColor(.black.opacity(0.4))
