@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct GeneratedRecipesView: View {
+//    @Binding var recipe: RecipeModel
+    @EnvironmentObject var viewModel: ViewModel
+    var recipeViewModel =  RecipeViewModel()
     private let flexibleColumn = [
         GridItem(.fixed(170), spacing: 28),
         GridItem(.fixed(170))
@@ -16,10 +19,10 @@ struct GeneratedRecipesView: View {
     var body: some View {
         VStack{
             HStack {
-                Image(systemName: "arrow.left.circle")
-                    .resizable()
-                    .frame(width: 40, height: 40, alignment: .leading)
-                    .padding(.leading)
+//                Image(systemName: "arrow.left.circle")
+//                    .resizable()
+//                    .frame(width: 40, height: 40, alignment: .leading)
+//                    .padding(.leading)
                     
                 
                 //Spacer()
@@ -37,18 +40,20 @@ struct GeneratedRecipesView: View {
             
             ScrollView {
                 LazyVGrid(columns: flexibleColumn, spacing: 15) {
-                    ForEach(recipeList.indices, id: \.self) { index in
-                        FavoriteItemView(recipe: recipeList[index])
+                    ForEach(recipeViewModel.allRecipes, id: \.id) { recipe in
+                        FavoriteItemView(recipe: recipe)
                     }
                 }
             }
             
-            Text("TOOLBAR")
+  
         }//fim da grande VStack
         
     }
 }
-
+//
 #Preview {
+    @Previewable @StateObject var viewModel = ViewModel()
     GeneratedRecipesView()
+        .environmentObject(viewModel)
 }
