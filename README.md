@@ -61,7 +61,7 @@ Nessa tela, o usuário poderá obter algumas informações a respeito de uma rec
       <td align="center"><a href="https://github.com/LeviFaleh"><img src="https://avatars.githubusercontent.com/LeviFaleh" width="100px;" alt="LeviFaleh"/><br /><sub><b>Levi Faleh</b></a>
         <p><sub>Developer</sub></p></sub></td>
       <td align="center"><a href="https://github.com/VorAd2"><img src="https://avatars.githubusercontent.com/VorAd2" width="100px;" alt="VorAd2"/><br /><sub><b>Vitor Adriano</b></sub></a>
-        <p><sub>Developer</sub></p></td>
+        <p><sub>Designer</sub></p></td>
     </tr>
   </tbody>
 </table>
