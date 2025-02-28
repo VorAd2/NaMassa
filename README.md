@@ -11,7 +11,7 @@ O app se baseia na premissa de oferecer uma maneira prática de encontrar receit
 
 <p align="center">
   <img src="NamassaUtils/Screens/Inicializar.png" alt="Entrada" width="300">
-  <img src="NamassaUtils/Screens/Entrada.png" alt="Entrada" width="300">
+  <!--><img src="NamassaUtils/Screens/Entrada.png" alt="Entrada" width="300"> <-->
 </p>
 
 
@@ -42,6 +42,12 @@ Nessa tela, o usuário poderá obter algumas informações a respeito de uma rec
   <img src="NamassaUtils/Screens/Receita.png" alt="Página da receita" width="250" >
 </p>
 
+## Receitas favoritas
+As receitas favoritadas aparecerão aqui
+
+<p align="center">
+  <img src="NamassaUtils/Screens/Favoritas.png" alt="Receitas favoritas" width="250" >
+</p>
 
 # Atalhos para nosso Github 🎯
 - [Models](Namassa/Models)  
