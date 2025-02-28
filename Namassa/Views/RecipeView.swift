@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct RecipeView: View {
+    
+    @AppStorage("favorites") var favorites = "" // [1][2]
+    
     @Environment(\.presentationMode) var presentationMode
-    var recipe: RecipeModel
+    @EnvironmentObject var viewModel: ViewModel
+    
+    let recipe: RecipeModel
     
     var body: some View {
             ScrollView {
@@ -30,22 +35,31 @@ struct RecipeView: View {
                     // Informações abaixo da imagem
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            Text("Feijoada tradicional")
+                            Text(recipe.name)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                             
+                            let isFavorite = favorites.contains("[\(recipe.id)]")
+                             
+                            Spacer()
+                            
                             Button {
-                                withAnimation {
-                                    recipe.isFav.toggle()
+                                if isFavorite {
+                                    favorites.replace("[\(recipe.id)]", with: "")
+                                } else {
+                                    favorites.append("[\(recipe.id)]")
                                 }
+//                                withAnimation {
+//                                    recipe.toggle()
+//                                }
                             }label: {
-                                if !recipe.isFav{
-                                    Image(systemName: "star")
+                                if !isFavorite {
+                                    Image(systemName: "heart")
                                         .resizable()
                                         .frame(width: 30, height: 30).foregroundColor(Color(hex:"#FF2201"))
                                         //.offset(x: 167 ,y: -85)
                                 } else {
-                                    Image(systemName: "star.fill")
+                                    Image(systemName: "heart.fill")
                                         .resizable()
                                         .frame(width: 30, height: 30).foregroundColor(Color(hex:"#FF2201"))
                                         //.offset(x: 167 ,y: -85)
@@ -58,21 +72,33 @@ struct RecipeView: View {
                             .font(.body)
                             .foregroundColor(.secondary)
                         
-                        Text("Passa a passo")
+                        Text("Ingredientes")
                             .font(.headline)
+//                            .fontWeight()
                         
-                        Text("- Passo1")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        ForEach(recipe.ingredients, id: \.self) { ingredient in
+                            HStack{
+                                Text("\u{2022}")
+                                Text(ingredient)
+                            }
+                        }//                        Text("- Passo1")
+//                            .font(.subheadline)
+//                            .foregroundColor(.secondary)
                         
                         Divider().foregroundColor(Color(hex: "#FF2201"))
                         
-                        Text("Anotações")
+                        Text("Modo de preparo")
                             .font(.headline)
                         
-                        Text("# 4 colheres de sal, ao invés de 5")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        let url = Bundle.main.path(forResource: "\(recipe.id)", ofType: "txt")
+                        
+                        if let url, let contents = try? String(contentsOfFile: url, encoding: .utf8) {
+                            Text(contents)
+                                .font(.subheadline)
+                                .fontWeight(.regular)
+                        }
+                        
+                        
                         
                     }
                     .padding()
@@ -81,20 +107,27 @@ struct RecipeView: View {
             }
             //.navigationTitle("Detalhes da receita")
             //.navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
+//            .navigationBarBackButtonHidden(true)
+//            .onAppear{
+//                do{
+//                    let res = try StaticJSONMapper.decode
+//                }
+//            }
         
-        Button {
-            presentationMode.wrappedValue.dismiss()
-        }label: {
-            Image(systemName: "arrowshape.left.circle")
-                .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(Color(hex: "#FF2201"))
-        }
+//        Button {
+//            presentationMode.wrappedValue.dismiss()
+//        }label: {
+//            Image(systemName: "arrowshape.left.circle")
+//                .resizable()
+//                .frame(width: 40, height: 40)
+//                .foregroundColor(Color(hex: "#FF2201"))
+//        }
         
     }
 }
 
 #Preview {
-    RecipeView(recipe: recipeList[0])
+    @Previewable @StateObject var viewModel = ViewModel()
+    RecipeView(recipe: .init(id: 1, image: "Cookie", ingredients: ["Carne", "oki"], name: "Cookies", tags: ["Carne Moída"]))
+        .environmentObject(viewModel)
 }
