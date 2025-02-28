@@ -1,5 +1,5 @@
 #### _Read this in other languages_
-<kbd>[<img title="Português" alt="Português" src="../../IGNORE/images/brFlag.png" width="60">](../../README.md)</kbd>
+<kbd>[<img title="Português" alt="Português" src="../../NamassaUtils/brFlag.png" width="60">](../../README.md)</kbd>
 
 
 # Namassa App
