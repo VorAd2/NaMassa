@@ -1,80 +1,29 @@
-//
-//  IngredientsSelectionView.swift
-//  Namassa
-//
-//  Created by found on 14/02/25.
-//
-
 import SwiftUI
 
-enum SelectedType {
-    case bread
-    case rice
-    case pasta
-    case potato
-    case cereals
-    case banana
-    case none
-    case all
-    
-    func getOptions() -> [String] {
-        switch self {
-        case .bread:
-            return ["Pão Francês", "Fast"]
-        case .rice:
-            return ["Arroz branco", "Arroz parboilizado"]
-        case .pasta:
-            return ["Fettucine", "Spaguetti"]
-        case .potato:
-            return ["Batata doce", "Batata inglesa"]
-        case .cereals:
-            return ["Lentilha", "Chia"]
-        case .banana:
-            return ["Banana prata", "Banana da terra"]
-        case .none:
-            return []
-        case .all:
-            return [
-                "Pão Francês", "Fast",
-                "Arroz branco", "Arroz parboilizado",
-                "Fettucine", "Spaguetti",
-                "Batata doce", "Batata inglesa",
-                "Lentilha", "Chia",
-                "Banana prata", "Banana da terra"
-                
-            ]
-        }
-    }
-}
+struct CarbsView: View {
 
-struct IngredientsSelectionView: View {
-//    @State var searchText = ""
-    @State var selectedType: SelectedType = .none
-    
     @State var selectedTags: Set<String> = []
-    @Binding var tags: [String]
-    @Binding var ingredientType: String {
-        didSet {
-            print(ingredientType)
-            typesList = selectedType.getOptions().filter({ text in
-                ingredientType == text
+    
+    @EnvironmentObject var viewModel: ViewModel
+    
+    @State var ingredientType: String = ""
+    
+    var typesList: [String] {
+        var result = viewModel.selectedCarbType.getOptions()
+        if !ingredientType.isEmpty {
+            result = result.filter({ text in
+                text.localizedStandardContains(ingredientType)
             })
         }
+        print(result)
+        return result
     }
-    
-    @State var typesList: [String] = []
     
     var body: some View {
     
         VStack {
-            Text("Monte seu prato")
-                .font(.system(size: 30))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .bold()
-                .padding(.leading, 50)
-                .padding(.bottom, 40)
             
-            Text("\u{2022} Selecione os carboidratos")
+            Text("\u{2022} Selecione os Carboidratos")
                 .font(.system(size: 20))
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -85,102 +34,102 @@ struct IngredientsSelectionView: View {
             VStack(spacing: 15) {
                 HStack(spacing:15){
                     SelectButtonView(
-                        buttonSelected: selectedType == .bread,
+                        buttonSelected: viewModel.selectedCarbType == .bread,
                         textColor: .white,
                         color: .red,
                         text: "Pão"
                     )
                         .onTapGesture {
-                            if selectedType == .bread {
-                                selectedType = .none
+                            if viewModel.selectedCarbType == .bread {
+                                viewModel.selectedCarbType = .none
                             } else {
-                                selectedType = .bread
+                                viewModel.selectedCarbType = .bread
                             }
 //                            showSearch()
-                            showTypes()
+                            showCarbs()
                             
                             
                         }
                     SelectButtonView(
-                        buttonSelected: selectedType == .rice,
+                        buttonSelected: viewModel.selectedCarbType == .rice,
                         textColor: .white,
                         color: .red,
                         text: "Arroz"
                     )
                         .onTapGesture {
-                            if selectedType == .rice {
-                                selectedType = .none
+                            if viewModel.selectedCarbType == .rice {
+                                viewModel.selectedCarbType = .none
                             } else {
-                                selectedType = .rice
+                                viewModel.selectedCarbType = .rice
                             }
 //                            showSearch()
-                            showTypes()
+                            showCarbs()
                         }
 
                     SelectButtonView(
-                        buttonSelected: selectedType == .pasta,
+                        buttonSelected: viewModel.selectedCarbType == .pasta,
                         textColor: .white,
                         color: .red,
                         text: "Massas"
                     )
                         .onTapGesture {
-                            if selectedType == .pasta {
-                                selectedType = .none
+                            if viewModel.selectedCarbType == .pasta {
+                                viewModel.selectedCarbType = .none
                             } else {
-                                selectedType = .pasta
+                                viewModel.selectedCarbType = .pasta
                             }
 //                            showSearch()
-                            showTypes()
+                            showCarbs()
                         }
 
                 }
                 HStack(spacing:15){
                     SelectButtonView(
-                        buttonSelected: selectedType == .potato,
+                        buttonSelected: viewModel.selectedCarbType == .potato,
                         textColor: .white,
                         color: .red,
                         text: "Batatas"
                     )
                     .onTapGesture {
-                        if selectedType == .potato {
-                            selectedType = .none
+                        if viewModel.selectedCarbType == .potato {
+                            viewModel.selectedCarbType = .none
                         } else {
-                            selectedType = .potato
+                            viewModel.selectedCarbType = .potato
                         }
 //                        showSearch()
-                        showTypes()
+                        showCarbs()
                     }
 
                     SelectButtonView(
-                        buttonSelected: selectedType == .cereals,
+                        buttonSelected: viewModel.selectedCarbType == .cereals,
                         textColor: .white,
                         color: .red,
                         text: "Cereais"
                     )
                         .onTapGesture {
-                            if selectedType == .cereals {
-                                selectedType = .none
+                            if viewModel.selectedCarbType == .cereals {
+                                viewModel.selectedCarbType = .none
                             } else {
-                                selectedType = .cereals
+                                viewModel.selectedCarbType = .cereals
                             }
                             
-                            showTypes()
+                            showCarbs()
                          
                         }
 
                     SelectButtonView(
-                        buttonSelected: selectedType == .banana,
+                        buttonSelected: viewModel.selectedCarbType == .flour,
                         textColor: .white,
                         color: .red,
-                        text: "Banana"
+                        text: "Farinhas"
                     )
                         .onTapGesture {
-                            if selectedType == .banana {
-                                selectedType = .none
+                            if viewModel.selectedCarbType == .flour {
+                                viewModel.selectedCarbType = .none
                             } else {
-                                selectedType = .banana
+                                viewModel.selectedCarbType = .flour
                             }
-                            showTypes()
+                            showCarbs()
                         }
 
                 }
@@ -191,6 +140,7 @@ struct IngredientsSelectionView: View {
             
 //            FarinhasView(options: selectedType.getOptions(), tags: .constant([]))
             VStack{
+               
                 Text("\u{2022} Qual o tipo?")
                     .font(.system(size: 20))
                     .fontWeight(.bold)
@@ -210,34 +160,24 @@ struct IngredientsSelectionView: View {
                     .padding(.bottom)
                 
                 ScrollView {
-                    ForEach(searchTypes, id: \.self) { element in
+                    ForEach(typesList, id: \.self) { element in
                         TagView(
                             title: element,
-                            isSelected: tags.contains(element)
+                            isSelected: viewModel.tags.contains(element)
                         )
-                        //                    ZStack {
-                        //                        tags.contains(element) ? .orange : Color(hex:"CDCDCD")
-                        //
-                        //                        HStack {
-                        //                            Spacer()
-                        //                            Text(element)
-                        //                            Spacer()
-                        //                        }
-                        //                            .padding(.horizontal,12)
-                        //                            .padding(.vertical,8)
-                        //                    }
-                        //                    .fixedSize()
+               
                         .frame(width: 363)
                         .scaleEffect(selectedTags.contains(element) ? 0.9 : 1.0)
                         .onTapGesture{
-                            toggleSelection(for: element)
+                            
+                            toggleSelectionC(for: element)
                             // ["a", "a", "b"]
-                            if tags.contains(element) {
-                                tags.removeAll { each in
+                            if viewModel.tags.contains(element) {
+                                viewModel.tags.removeAll { each in
                                     each == element
                                 }
                             } else {
-                                tags.append(element)
+                                viewModel.tags.append(element)
                             }
                         }
                         .animation(.spring, value: selectedTags.contains( element))
@@ -246,7 +186,7 @@ struct IngredientsSelectionView: View {
                     
                 }
                 .scrollIndicators(.hidden)
-                .searchable(text: $ingredientType)
+//                .searchable(text: $ingredientType)
                 //            GeometryReader { geometry in
                 //
                 //            }
@@ -255,14 +195,7 @@ struct IngredientsSelectionView: View {
             Spacer()
             
             
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(width: 193, height: 70)
-                    .foregroundColor(Color(hex: "E3A09F"))
-                Text("Próxima")
-                    .fontWeight(.semibold)
-                    .font(.system(size: 34))
-            }.padding(.bottom, 40)
+
         }
     }
 //    private func showSearch(){
@@ -270,21 +203,21 @@ struct IngredientsSelectionView: View {
 //            SearchBarView(ingredientType: $ingredientType)
 //        }
 //    }
-    private func toggleSelection(for tag: String){
+    private func toggleSelectionC(for tag: String){
         if selectedTags.contains(tag) {
             selectedTags.remove(tag)
         } else {
             selectedTags.insert(tag)
         }
     }
-    private func showTypes() {
-        if selectedType != .none{
-            typesList = selectedType.getOptions()
-        } else {
-            typesList = []
-        }
+    private func showCarbs() {
+//        if selectedType != .none{
+//            typesList = selectedType.getOptions()
+//        } else {
+//            typesList = []
+//        }
     }
-    var searchTypes: [String]{
+    var searchCarbTypes: [String]{
         if ingredientType.isEmpty{
             return typesList
         } else{
@@ -314,10 +247,11 @@ struct TagView: View {
     let isSelected: Bool
     var body: some View {
         ZStack {
-            isSelected ? .orange : Color(hex:"CDCDCD")
+            isSelected ? /*Color(hex: "FF500B")*/ .red : Color(hex:"CDCDCD")
             HStack {
                 Spacer()
                 Text(title)
+                    .foregroundColor(isSelected ? .white : .black)
                 Spacer()
             }
                 .padding(.horizontal,12)
@@ -326,30 +260,10 @@ struct TagView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
-//struct SearchBarView: View {
-//    @Binding var ingredientType: String
-//    var body: some View{
-//        Text("\u{2022} Qual o tipo?")
-//            .font(.system(size: 20))
-//            .fontWeight(.bold)
-//            .frame(maxWidth: .infinity, alignment: .leading)
-//            .padding(.leading)
-//            .padding(.bottom, 20)
-//        
-//        HStack {
-//            TextField("Digite aqui..." ,text: $ingredientType)
-//                .autocapitalization(.none)
-//                .padding(.leading, 25)
-//            Image(systemName: "magnifyingglass")
-//                .padding(.trailing, 20)
-//        }
-//        RoundedRectangle(cornerRadius: 0)
-//            .frame(width: 380, height: 1)
-//            .padding(.bottom)
-//    }
-//}
+
 #Preview {
-    @Previewable @State var tags: [String] = []
+    @Previewable @StateObject var viewModel = ViewModel()
     @Previewable @State var ingredientType: String = ""
-    IngredientsSelectionView(tags: $tags, ingredientType: $ingredientType)
+    CarbsView()
+        .environmentObject(viewModel)
 }
