@@ -1,5 +1,5 @@
 #### _Leia isso em outras linguaguens_
-<kbd>[<img title="Português" alt="Português" src="IGNORE/images/usaFlag.png" width="60">](NamassaUtils/Translations/READMEen.md)</kbd>
+<kbd>[<img title="Português" alt="Português" src="NamassaUtils/usaFlag.png" width="60">](NamassaUtils/Translations/READMEen.md)</kbd>
 
 
 ![Static Badge](https://img.shields.io/badge/Swift-5-blue?logo=Swift&logoColor=%23F05138)
