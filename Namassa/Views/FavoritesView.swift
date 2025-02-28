@@ -9,15 +9,21 @@ import SwiftUI
 import SwiftData
 
 struct FavoritesView: View {
+    
+   
     @State private var search = ""
+    @EnvironmentObject var viewModel: ViewModel
     private let flexibleColumn = [
         GridItem(.fixed(170), spacing: 28),
         GridItem(.fixed(170))
     ]
+    @AppStorage("favorites") var favorites = ""
     
     @Environment(\.modelContext) var modelContext
-    @Query var persRecipes: [RecipeModel]
-    var favRecipes: [RecipeModel] = []
+//    @Query var persRecipes: [RecipeModel]
+//    @Binding var favRecipes: [RecipeModel]
+    
+    var recipeViewModel = RecipeViewModel()
     
     var body: some View {
         NavigationView{
@@ -25,7 +31,7 @@ struct FavoritesView: View {
                 HStack {
                     Text("Favoritos")
                         .font(.system(size: 38))
-                    Spacer()
+                   Spacer()
                 }.padding(.top, 5)
                     .padding(.leading, 25)
                 
@@ -33,6 +39,7 @@ struct FavoritesView: View {
                     HStack{
                         FieldView(symbol: "magnifyingglass", message: "Pesquisar receita", txt: $search)
                     }
+                   
                 }
                 .padding(.horizontal, 16)
                 
@@ -55,14 +62,30 @@ struct FavoritesView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: flexibleColumn, spacing: 15) {
-                        ForEach(favRecipes.indices, id: \.self) { index in
-                            FavoriteItemView(recipe: favRecipes[index])
+                        
+                        var result = recipeViewModel.allRecipes.filter { recipe in
+                            favorites.contains("[\(recipe.id)]")
+                            
+                            
+//                            result = result.filter({ text in
+//                                text.localizedStandardContains(ingredientType)
+//                            })
+                        }
+                        
+                        let favoriteRecipes = !search.isEmpty ? result.filter { rec in
+                            rec.name.localizedStandardContains(search)
+                        } : result
+
+                                                
+                        
+                        ForEach(favoriteRecipes) { recipe in
+                            FavoriteItemView(recipe: recipe)
                         }
                     }
                 }
                 
                 
-                Text("TOOLBAR")
+             
                 
             }//fim VStack
         }
@@ -70,38 +93,9 @@ struct FavoritesView: View {
 }
 
 #Preview {
+    @Previewable @StateObject var viewModel = ViewModel()
     FavoritesView()
+        .environmentObject(viewModel)
 }
 
 
-//extension FavoritesView{
-//    private func pairedItems<T>(_ items: [T]) -> [(first: T?, second: T?)] {
-//        var result: [(first: T?, second: T?)] = []
-//        let chunks = stride(from: 0, to: items.count, by: 2)
-//        for index in chunks {
-//            let first = items[index]
-//            let second = index + 1 < items.count ? items[index + 1] : nil
-//            result.append((first, second))
-//        }
-//        return result
-//    }
-//
-//}
-
-
-//                      TextField("Digite algo...", text: $search)
-//                            .padding(.vertical, 8)
-//                            .background(
-//                                VStack {
-//                                    Spacer()
-//                                    Rectangle()
-//                                        .frame(height: 3)
-//                                        .foregroundColor(.black)
-//                                        .cornerRadius(2)
-//                                }
-//                            )
-//                            .padding(.horizontal, 4)
-//
-//                        Spacer()
-//
-//                        Image(systemName: "magnifyingglass")
