@@ -8,7 +8,6 @@ Namassa is a prototype iOS application developed by students from the Federal In
 
 <p align="center">
   <img src="../Screens/Inicializar.png" alt="Entrada" width="300">
-  <img src="../Screens/Entrada.png" alt="Entrada" width="300">
 </p>
 
 # Main features :joystick:
