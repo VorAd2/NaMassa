@@ -38,8 +38,8 @@ On this screen, the user can obtain some information about a selected recipe.
   <img src="../Screens/Receita.png" alt="Página da receita" width="250" >
 </p>
 
-## Favorites recipes
-As receitas favoritadas aparecerão aqui
+## Favorite recipes
+Your favorite recipes will appear here
 
 <p align="center">
   <img src="../../NamassaUtils/Screens/Favoritas.png" alt="Receitas favoritas" width="250" >
