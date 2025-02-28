@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Fundo de 73a51270-7933-4bbf-90f5-80bb8bcf6e97 Removido.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

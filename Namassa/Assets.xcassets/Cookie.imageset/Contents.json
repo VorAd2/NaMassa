@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Fundo de 098f9f43-f888-4d51-8ef2-ea74e648a079 Removido.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Fundo de 1859d86a-12bb-4720-8a14-6cfb1a1a1abf Removido.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
