@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct FavoriteItemView: View {
-    var recipe: RecipeModel
     
+//    @EnvironmentObject var viewModel: ViewModel
+    let recipe: RecipeModel
+
+//    @Binding var tags: [String]
     var body: some View {
         NavigationLink(destination: RecipeView(recipe: recipe)) {
             ZStack {
@@ -18,10 +21,12 @@ struct FavoriteItemView: View {
                     .fill(Color.black.opacity(1))
                     .shadow(color: .gray.opacity(0.9) ,radius: 1, x: 0.5)
                     .frame(width: 170, height: 170)
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.black.opacity(1))
-                    .shadow(color: .gray.opacity(0.9) ,radius: 1, x: -0.5)
-                    .frame(width: 170, height: 170)
+                HStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.black.opacity(1))
+                        .shadow(color: .gray.opacity(0.9) ,radius: 1, x: -0.5)
+                        .frame(width: 170, height: 170)
+                }
                 
                 RoundedRectangle(cornerRadius: 16)
                     .fill(Color.white)
@@ -36,15 +41,16 @@ struct FavoriteItemView: View {
                     .frame(width: 170, height: 170)
                 
                 
-                RoundedRectangle(cornerRadius: 0)
-                    .fill(Color.gray.opacity(0.7))
-                    .frame(width: 170, height: 1)
-                    .scaledToFill()
-                    .position(x: 86 ,y: 82)
+//                RoundedRectangle(cornerRadius: 0)
+//                    .fill(Color.gray.opacity(0.7))
+//                    .frame(width: 170, height: 1)
+//                    .scaledToFill()
+//                    .position(x: 86 ,y: 82)
                 
                 
                 VStack(spacing: 0) {
                     // Parte superior com imagem e botão
+                    
                     ZStack(alignment: .topTrailing) {
                         Image(recipe.image)
                             .resizable()
@@ -53,32 +59,33 @@ struct FavoriteItemView: View {
                             .clipped()
                             .offset(y: 9)
                         //.offset(x: -15)
-                        Button {
-                            recipe.isFav.toggle()
-                        }label: {
-                            ZStack{
-                                if !recipe.isFav {
-                                    Image(systemName: "star")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(Color(hex: "FF2201"))
-                                } else {
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(Color(hex: "FF2201"))
-                                }
-                            }
-                        }
-                        .offset(x:5 ,y: 13)
-                        
-                        
+                        ////                        Button {
+                        ////                            recipe.isFav.toggle()
+                        ////                        }label: {
+                        ////                            ZStack{
+                        ////                                if !recipe.isFav {
+                        ////                                    Image(systemName: "star")
+                        ////                                        .resizable()
+                        ////                                        .frame(width: 20, height: 20)
+                        ////                                        .foregroundColor(Color(hex: "FF2201"))
+                        ////                                } else {
+                        ////                                    Image(systemName: "star.fill")
+                        ////                                        .resizable()
+                        ////                                        .frame(width: 20, height: 20)
+                        ////                                        .foregroundColor(Color(hex: "FF2201"))
+                        ////                                }
+                        ////                            }
+                        ////                        }
+                        ////                        .offset(x:5 ,y: 13)
+                        //                        
+                        //                        
+                        //                    }
                     }
                     
                     // Parte inferior com textos
                     VStack(alignment: .leading, spacing: 8) {
                         
-                        Text("\(recipe.name)")
+                        Text(recipe.name)
                             .font(.headline)
                             .foregroundColor(.black)
                             .lineLimit(2)
@@ -96,9 +103,13 @@ struct FavoriteItemView: View {
             }//fim da ZStack maior
         }
     }
+    
 }
 
 
 #Preview {
-    FavoriteItemView(recipe: recipeList[0])
+    @Previewable @StateObject var viewModel = ViewModel()
+    
+    FavoriteItemView(recipe: .init(id: 1, image: "Sushi", ingredients: [], name: "Sushi", tags: ["Carne Moída"]))
+        .environmentObject(viewModel)
 }
