@@ -49,6 +49,7 @@ As receitas favoritadas aparecerão aqui
 </p>
 
 # Atalhos para nosso Github 🎯
+- [Videos](NamassaUtils/Videos)
 - [Models](Namassa/Models)  
 - [Views](Namassa/Views)  
 - [Images](NamassaUtils)
