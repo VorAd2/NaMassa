@@ -1,11 +1,39 @@
-
   [
     {
-        "imageURL":"african.jpg",
-        "meat": "Carne Moída",
-        "name": "Escondinho",
+        "id": 1,
+        "image":"Cookie",
+        "ingredients": ["65g de Açúcar refinado","65g de Açúcar mascavo", "75g de manteiga", "1 Ovo médio", "160g de Farinha de trigo", "4g de Bicarbonato de Sódio", "3g Amido de milho", "3g Sal",
+        "40g Leite em pó", "150g Gotas de Chocolate"],
+        "name": "Cookies",
+        "tags": ["Farinha de Trigo"]
+    },
+    {
+        "id": 2,
+        "image":"Lasagna",
+        "ingredients": ["500g Carne Moída", "500G Linguiça Toscana"],
+        "name": "Lasanha",
         "tags": ["Carne Moída"]
+    },
+    {
+        "id": 3,
+        "image":"Focaccia",
+        "ingredients": ["500g Farinha de Trigo", "380g Água", "20g Azeite", "5g Fermento biológico seco", "10g sal"],
+        "name": "Focaccia",
+        "tags": ["Farinha de Trigo"]
+    },
+    {
+        "id": 4,
+        "image":"FishChips",
+        "ingredients": ["500G Batata inglesa", "500G Filé de Tilápia"],
+        "name": "Fish and Chips",
+        "tags": ["Tilápia"]
+    },
+    {
+        "id": 5,
+        "image":"SorveteB",
+        "ingredients": ["250ml de Leite", "3 Gemas de ovo", "150g Açúcar"],
+        "name": "Sorvete de Baunilha",
+        "tags": ["Ovo"]
     }
     
 ]
-
