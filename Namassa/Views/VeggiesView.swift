@@ -18,10 +18,19 @@ struct VeggiesView: View {
     
     // TODO: Fazer igual na de carboidratos
     @State var ingredientType: String = ""
-    @State var typesList: [String] = []
+    var typesList: [String]{
+        var result = viewModel.selectedVeggieType.getOptions()
+        if !ingredientType.isEmpty {
+            result = result.filter({ text in
+                text.localizedStandardContains(ingredientType)
+            })
+        }
+        print(result)
+        return result
+    }
     
     var body: some View {
-        Text("\u{2022} Selecione as Proteínas")
+        Text("\u{2022} Selecione os Vegetais")
             .font(.system(size: 20))
             .fontWeight(.bold)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -32,102 +41,102 @@ struct VeggiesView: View {
         VStack(spacing: 15) {
             HStack(spacing:15){
                 SelectButtonView(
-                    buttonSelected: viewModel.selectedProteinType == .leafs,
+                    buttonSelected: viewModel.selectedVeggieType == .leafs,
                     textColor: .white,
                     color: .red,
                     text: "Folhas"
                 )
                     .onTapGesture {
-                        if viewModel.selectedProteinType == .leafs {
-                            viewModel.selectedProteinType = .none
+                        if viewModel.selectedVeggieType == .leafs {
+                            viewModel.selectedVeggieType = .none
                         } else {
-                            viewModel.selectedProteinType = .leafs
+                            viewModel.selectedVeggieType = .leafs
                         }
 
-                        showProtein()
+                        showVeggies()
                         
                         
                     }
                 SelectButtonView(
-                    buttonSelected: viewModel.selectedProteinType == .roots,
+                    buttonSelected: viewModel.selectedVeggieType == .roots,
                     textColor: .white,
                     color: .red,
                     text: "Raízes"
                 )
                     .onTapGesture {
-                        if viewModel.selectedProteinType == .roots {
-                            viewModel.selectedProteinType = .none
+                        if viewModel.selectedVeggieType == .roots {
+                            viewModel.selectedVeggieType = .none
                         } else {
-                            viewModel.selectedProteinType = .roots
+                            viewModel.selectedVeggieType = .roots
                         }
 //                            showSearch()
-                        showProtein()
+                        showVeggies()
                     }
 
                 SelectButtonView(
-                    buttonSelected: viewModel.selectedProteinType == .fruits,
+                    buttonSelected: viewModel.selectedVeggieType == .fruits,
                     textColor: .white,
                     color: .red,
                     text: "Frutos"
                 )
                     .onTapGesture {
-                        if viewModel.selectedProteinType == .fruits {
-                            viewModel.selectedProteinType = .none
+                        if viewModel.selectedVeggieType == .fruits {
+                            viewModel.selectedVeggieType = .none
                         } else {
-                            viewModel.selectedProteinType = .fruits
+                            viewModel.selectedVeggieType = .fruits
                         }
 //                            showSearch()
-                        showProtein()
+                        showVeggies()
                     }
 
             }
             HStack(spacing:15){
                 SelectButtonView(
-                    buttonSelected: viewModel.selectedProteinType == .nuts,
+                    buttonSelected: viewModel.selectedVeggieType == .nuts,
                     textColor: .white,
                     color: .red,
                     text: "Nozes"
                 )
                 .onTapGesture {
-                    if viewModel.selectedProteinType == .nuts {
-                        viewModel.selectedProteinType = .none
+                    if viewModel.selectedVeggieType == .nuts {
+                        viewModel.selectedVeggieType = .none
                     } else {
-                        viewModel.selectedProteinType = .nuts
+                        viewModel.selectedVeggieType = .nuts
                     }
 //                        showSearch()
-                    showProtein()
+                    showVeggies()
                 }
 
                 SelectButtonView(
-                    buttonSelected: viewModel.selectedProteinType == .seeds,
+                    buttonSelected: viewModel.selectedVeggieType == .seeds,
                     textColor: .white,
                     color: .red,
                     text: "Sementes"
                 )
                     .onTapGesture {
-                        if viewModel.selectedProteinType == .seeds {
-                            viewModel.selectedProteinType = .none
+                        if viewModel.selectedVeggieType == .seeds {
+                            viewModel.selectedVeggieType = .none
                         } else {
-                            viewModel.selectedProteinType = .seeds
+                            viewModel.selectedVeggieType = .seeds
                         }
                         
-                        showProtein()
+                        showVeggies()
                      
                     }
 
                 SelectButtonView(
-                    buttonSelected: viewModel.selectedProteinType == .stems,
+                    buttonSelected: viewModel.selectedVeggieType == .stems,
                     textColor: .white,
                     color: .red,
                     text: "Caules"
                 )
                     .onTapGesture {
-                        if viewModel.selectedProteinType == .stems {
-                            viewModel.selectedProteinType = .none
+                        if viewModel.selectedVeggieType == .stems {
+                            viewModel.selectedVeggieType = .none
                         } else {
-                            viewModel.selectedProteinType = .stems
+                            viewModel.selectedVeggieType = .stems
                         }
-                        showProtein()
+                        showVeggies()
                     }
 
             }
@@ -157,27 +166,15 @@ struct VeggiesView: View {
                 .padding(.bottom)
             
             ScrollView {
-                ForEach(searchProteinTypes, id: \.self) { element in
+                ForEach(typesList, id: \.self) { element in
                     TagView(
                         title: element,
                         isSelected: viewModel.tags.contains(element)
                     )
-                    //                    ZStack {
-                    //                        tags.contains(element) ? .orange : Color(hex:"CDCDCD")
-                    //
-                    //                        HStack {
-                    //                            Spacer()
-                    //                            Text(element)
-                    //                            Spacer()
-                    //                        }
-                    //                            .padding(.horizontal,12)
-                    //                            .padding(.vertical,8)
-                    //                    }
-                    //                    .fixedSize()
                     .frame(width: 363)
                     .scaleEffect(selectedTags.contains(element) ? 0.9 : 1.0)
                     .onTapGesture{
-                        toggleSelectionP(for: element)
+                        toggleSelectionV(for: element)
                         // ["a", "a", "b"]
                         if viewModel.tags.contains(element) {
                             viewModel.tags.removeAll { each in
@@ -193,7 +190,7 @@ struct VeggiesView: View {
                 
             }
             .scrollIndicators(.hidden)
-            .searchable(text: $ingredientType)
+//            .searchable(text: $ingredientType)
             //            GeometryReader { geometry in
             //
             //            }
@@ -211,7 +208,7 @@ struct VeggiesView: View {
 //                .font(.system(size: 34))
 //        }.padding(.bottom, 40)
     }
-    private func toggleSelectionP(for tag: String){
+    private func toggleSelectionV(for tag: String){
         if selectedTags.contains(tag) {
             selectedTags.remove(tag)
         } else {
@@ -219,13 +216,13 @@ struct VeggiesView: View {
         }
     }
     private func showVeggies() {
-        if viewModel.selectedProteinType != .none{
-            typesList = viewModel.selectedProteinType.getOptions()
-        } else {
-            typesList = []
-        }
+//        if viewModel.selectedProteinType != .none{
+//            typesList = viewModel.selectedProteinType.getOptions()
+//        } else {
+//            typesList = []
+//        }
     }
-    var searchProteinTypes: [String]{
+    var searchVeggieTypes: [String]{
         if ingredientType.isEmpty{
             return typesList
         } else{
@@ -236,5 +233,9 @@ struct VeggiesView: View {
 
 
 #Preview {
-    VegiesView()
+    @Previewable @StateObject var viewModel = ViewModel()
+    @Previewable @State var tags: [String] = []
+    @Previewable @State var ingredientType: String = ""
+    VeggiesView()
+        .environmentObject(viewModel)
 }
