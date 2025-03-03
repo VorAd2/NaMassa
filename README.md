@@ -73,7 +73,7 @@ As receitas favoritadas aparecerão aqui
 </table>
 </div>
 
-## Ferramentas usadas
+## Ferramentas
 |    |  |    |
 |----|-------------------------|----|
 | ![](NamassaUtils/google1.png) Google         | ![](NamassaUtils/XcodePequeno.png) Xcode | ![](NamassaUtils/chatgpt.png) ChatGPT |
