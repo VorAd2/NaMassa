@@ -1,4 +1,4 @@
-#### _Read this in other languages_
+#### _Leia isso em outras linguaguens_
 <kbd>[<img title="Português" alt="Português" src="../../NamassaUtils/brFlag.png" width="60">](../../README.md)</kbd>
 
 
