@@ -4,7 +4,7 @@
 
 # NaMassa App
 
-NaMassa is a prototype iOS application developed by students from the Federal Institute of Education, Science and Technology of Ceará during the Foundation class of the Apple Developer Academy. The app is based on the premise of offering a practical way of finding recipes based on the user's availability of ingredients. To this end, a filtering search engine is provided, allowing recipes to be found based on the user's choices.
+NaMassa is a prototype iOS application developed by students from the Federal Institute of Education, Science and Technology of Ceará during the Foundation class of the **Apple Developer Academy**. The app is based on the premise of offering a practical way of finding recipes based on the user's availability of ingredients. To this end, a filtering search engine is provided, allowing recipes to be found based on the user's choices.
 
 <p align="center">
   <img src="../Screens/Inicializar.png" alt="Entrada" width="300">
