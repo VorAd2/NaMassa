@@ -6,7 +6,7 @@
 
 
 # NaMassa App
-  NaMassa é um protótipo de aplicativo IOS desenvolvido por estudantes do Instituto Federal de Educação, Ciência e Tecnologia do Ceará(IFCE) durante a turma Foundation do Apple Developer Academy.
+  NaMassa é um protótipo de aplicativo IOS desenvolvido por estudantes do Instituto Federal de Educação, Ciência e Tecnologia do Ceará(IFCE) durante a turma Foundation do **Apple Developer Academy**.
 O app se baseia na premissa de oferecer uma maneira prática de encontrar receitas com base na disponibilidade de ingredientes do usuário. Para tal, um mecanismo de busca por filtragem é disponibilizado, permitindo a busca de receitas condicionadas às escolhas do usuário.
 
 <p align="center">
